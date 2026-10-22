@@ -28,3 +28,6 @@ xcshareddata/
 
 # Generated Xcode project
 *.xcodeproj
+
+# HyperMac: local analysis artifacts (binary packages, extracted trees)
+/artifacts

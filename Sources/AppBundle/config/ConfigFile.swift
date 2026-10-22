@@ -1,9 +1,9 @@
 import Common
 import Foundation
 
-let configDotfileName = isDebug ? ".hyprspace-debug.toml" : ".hyprspace.toml"
+let configDotfileName = isDebug ? ".hypermac-debug.toml" : ".hypermac.toml"
 func findCustomConfigUrl() -> ConfigFile {
-    let fileName = isDebug ? "hyprspace-debug.toml" : "hyprspace.toml"
+    let fileName = isDebug ? "hypermac-debug.toml" : "hypermac.toml"
     let xdgConfigHome = ProcessInfo.processInfo.environment["XDG_CONFIG_HOME"].map { URL(filePath: $0) }
         ?? FileManager.default.homeDirectoryForCurrentUser.appending(path: ".config/")
     let candidates: [URL] = if let configLocation = serverArgs.configLocation {
@@ -11,7 +11,7 @@ func findCustomConfigUrl() -> ConfigFile {
     } else {
         [
             FileManager.default.homeDirectoryForCurrentUser.appending(path: configDotfileName),
-            xdgConfigHome.appending(path: "hyprspace").appending(path: fileName),
+            xdgConfigHome.appending(path: "hypermac").appending(path: fileName),
         ]
     }
     let existingCandidates: [URL] = candidates.filter { (candidate: URL) in FileManager.default.fileExists(atPath: candidate.path) }

@@ -10,9 +10,9 @@ rm -rf .shell-completion && mkdir -p \
     .shell-completion/bash
 
 ./.deps/cargo-root/bin/complgen aot ./grammar/commands-bnf-grammar.txt \
-    --zsh-script .shell-completion/zsh/_hyprspace \
-    --fish-script .shell-completion/fish/hyprspace.fish \
-    --bash-script .shell-completion/bash/hyprspace
+    --zsh-script .shell-completion/zsh/_hypermac \
+    --fish-script .shell-completion/fish/hypermac.fish \
+    --bash-script .shell-completion/bash/hypermac
 
 if ! (not-outdated-bash --version | grep -q 'version 5'); then
     echo "bash version is too old. At least version 5 is required" > /dev/stderr
@@ -20,6 +20,6 @@ if ! (not-outdated-bash --version | grep -q 'version 5'); then
 fi
 
 # Check basic syntax
-zsh -c 'autoload -Uz compinit; compinit; source ./.shell-completion/zsh/_hyprspace'
-fish -c 'source ./.shell-completion/fish/hyprspace.fish'
-not-outdated-bash -c 'source ./.shell-completion/bash/hyprspace'
+zsh -c 'autoload -Uz compinit; compinit; source ./.shell-completion/zsh/_hypermac'
+fish -c 'source ./.shell-completion/fish/hypermac.fish'
+not-outdated-bash -c 'source ./.shell-completion/bash/hypermac'

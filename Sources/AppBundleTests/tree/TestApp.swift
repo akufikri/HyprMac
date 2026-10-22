@@ -12,7 +12,7 @@ final class TestApp: AbstractApp {
 
     private init() {
         self.pid = 0
-        self.bundleId = "barut.HyprSpace.test-app"
+        self.bundleId = "dev.hypermac.HyperMac.test-app"
         self.name = bundleId
     }
 

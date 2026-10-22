@@ -40,7 +40,7 @@ struct ReloadConfigCommand: Command {
             if !args.noGui {
                 showMessageInGui(
                     filenameIfConsoleApp: nil,
-                    title: "HyprSpace Config Error",
+                    title: "HyperMac Config Error",
                     message: msg,
                 )
             }

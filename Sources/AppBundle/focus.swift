@@ -56,8 +56,8 @@ struct FrozenFocus: AeroAny, Equatable, Sendable {
 
 /// Global focus.
 /// Commands must be cautious about accessing this property directly. There are legitimate cases.
-/// But, in general, commands must firstly check --window-id, --workspace, HYPRSPACE_WINDOW_ID env and
-/// HYPRSPACE_WORKSPACE env before accessing the global focus.
+/// But, in general, commands must firstly check --window-id, --workspace, HYPERMAC_WINDOW_ID env and
+/// HYPERMAC_WORKSPACE env before accessing the global focus.
 @MainActor var focus: LiveFocus { _focus.live }
 
 @MainActor func setFocus(to newFocus: LiveFocus) -> Bool {
@@ -181,8 +181,8 @@ extension Workspace {
         process.executableURL = URL(filePath: exec)
         process.arguments = Array(config.execOnWorkspaceChange.dropFirst())
         var environment = config.execConfig.envVariables
-        environment["HYPRSPACE_FOCUSED_WORKSPACE"] = newWorkspace
-        environment["HYPRSPACE_PREV_WORKSPACE"] = oldWorkspace
+        environment["HYPERMAC_FOCUSED_WORKSPACE"] = newWorkspace
+        environment["HYPERMAC_PREV_WORKSPACE"] = oldWorkspace
         process.environment = environment
         Result { try process.run() }.getOrDie() // todo It's not perfect to fail here
     }

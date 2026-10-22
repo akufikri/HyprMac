@@ -1,6 +1,6 @@
-# HyprSpace Release & Distribution Guide
+# HyperMac Release & Distribution Guide
 
-This guide explains how to create releases and distribute HyprSpace to users.
+This guide explains how to create releases and distribute HyperMac to users.
 
 ## ✅ What's Ready
 
@@ -8,7 +8,7 @@ Your repository is **ready to build and distribute** right now! Here's what's in
 
 ### 1. Git & GitHub
 - ✅ Working tree is clean (all changes committed)
-- ✅ GitHub remote configured: `git@github.com:BarutSRB/HyprSpace.git`
+- ✅ GitHub remote configured: `git@github.com:BarutSRB/HyperMac.git`
 - ✅ README.md has comprehensive documentation for users
 - ✅ CONTRIBUTING.md explains contribution process
 - ✅ LICENSE.txt included (MIT License)
@@ -42,10 +42,10 @@ This is the easiest way to get your project in users' hands:
    ```
 
 3. **Check the artifacts in `.release/`:**
-   - `HyprSpace-v0.1.0.zip` - This is what users will download!
-   - `hyprspace.rb` - Homebrew cask file (for later)
-   - `HyprSpace.app` - The app bundle
-   - `hyprspace` - The CLI binary
+   - `HyperMac-v0.1.0.zip` - This is what users will download!
+   - `hypermac.rb` - Homebrew cask file (for later)
+   - `HyperMac.app` - The app bundle
+   - `hypermac` - The CLI binary
 
 4. **Create a Git tag:**
    ```bash
@@ -58,36 +58,36 @@ This is the easiest way to get your project in users' hands:
    - Choose tag: `v0.1.0`
    - Release title: `v0.1.0 - Initial Release`
    - Description: See template below
-   - Attach: `HyprSpace-v0.1.0.zip`
+   - Attach: `HyperMac-v0.1.0.zip`
    - Click "Publish release"
 
 ### GitHub Release Description Template
 
 ```markdown
-# HyprSpace v0.1.0 - Initial Release
+# HyperMac v0.1.0 - Initial Release
 
 A Hyprland-inspired tiling window manager for macOS with a beautiful workspace bar.
 
 ## 🎉 First Public Release
 
-This is the first public release of HyprSpace! The window manager is functional and ready for daily use.
+This is the first public release of HyperMac! The window manager is functional and ready for daily use.
 
 ## 📦 Installation
 
 ### Download and Install
 
-1. Download `HyprSpace-v0.1.0.zip` below
+1. Download `HyperMac-v0.1.0.zip` below
 2. Extract the zip file
-3. Copy `HyprSpace.app` to `/Applications/`
-4. Copy `bin/hyprspace` to `/usr/local/bin/`
-5. Remove quarantine: `xattr -d com.apple.quarantine /Applications/HyprSpace.app`
-6. Launch HyprSpace and grant Accessibility permissions
+3. Copy `HyperMac.app` to `/Applications/`
+4. Copy `bin/hypermac` to `/usr/local/bin/`
+5. Remove quarantine: `xattr -d com.apple.quarantine /Applications/HyperMac.app`
+6. Launch HyperMac and grant Accessibility permissions
 
 ### Configuration
 
 Copy the default config:
 ```bash
-cp /Applications/HyprSpace.app/Contents/Resources/default-config.toml ~/.hyprspace.toml
+cp /Applications/HyperMac.app/Contents/Resources/default-config.toml ~/.hypermac.toml
 ```
 
 ## ✨ Features
@@ -135,18 +135,18 @@ Users download the zip from GitHub releases:
 ```bash
 # User steps:
 cd ~/Downloads
-unzip HyprSpace-v0.1.0.zip
-cp HyprSpace-v0.1.0/HyprSpace.app /Applications/
-cp HyprSpace-v0.1.0/bin/hyprspace /usr/local/bin/
-xattr -d com.apple.quarantine /Applications/HyprSpace.app
-xattr -d com.apple.quarantine /usr/local/bin/hyprspace
+unzip HyperMac-v0.1.0.zip
+cp HyperMac-v0.1.0/HyperMac.app /Applications/
+cp HyperMac-v0.1.0/bin/hypermac /usr/local/bin/
+xattr -d com.apple.quarantine /Applications/HyperMac.app
+xattr -d com.apple.quarantine /usr/local/bin/hypermac
 ```
 
 ### Method 2: Homebrew (Requires Setup - See Below)
 
 Once you setup a Homebrew tap:
 ```bash
-brew install --cask barutsrb/tap/hyprspace
+brew install --cask barutsrb/tap/hypermac
 ```
 
 ## 🍺 Setting Up Homebrew Distribution
@@ -168,11 +168,11 @@ cd homebrew-tap
 mkdir -p Casks
 
 # Copy the generated cask file
-cp /path/to/HyprSpace/.release/hyprspace.rb Casks/hyprspace.rb
+cp /path/to/HyperMac/.release/hypermac.rb Casks/hypermac.rb
 
 # Commit and push
-git add Casks/hyprspace.rb
-git commit -m "Add HyprSpace cask"
+git add Casks/hypermac.rb
+git commit -m "Add HyperMac cask"
 git push
 ```
 
@@ -180,40 +180,40 @@ git push
 
 The auto-generated cask file will have a local file:// URL. You need to update it:
 
-Edit `Casks/hyprspace.rb` and change:
+Edit `Casks/hypermac.rb` and change:
 ```ruby
-url "file:///path/to/.release/HyprSpace-v0.1.0.zip"
+url "file:///path/to/.release/HyperMac-v0.1.0.zip"
 ```
 
 To:
 ```ruby
-url "https://github.com/BarutSRB/HyprSpace/releases/download/v0.1.0/HyprSpace-v0.1.0.zip"
+url "https://github.com/BarutSRB/HyprSpace/releases/download/v0.1.0/HyperMac-v0.1.0.zip"
 ```
 
 **OR** use the automated script (after you've created the GitHub release):
 
 ```bash
-cd /path/to/HyprSpace
+cd /path/to/HyperMac
 ./script/build-brew-cask.sh \
-    --cask-name hyprspace \
-    --zip-uri "https://github.com/BarutSRB/HyprSpace/releases/download/v0.1.0/HyprSpace-v0.1.0.zip" \
+    --cask-name hypermac \
+    --zip-uri "https://github.com/BarutSRB/HyprSpace/releases/download/v0.1.0/HyperMac-v0.1.0.zip" \
     --build-version "0.1.0"
 
 # This regenerates the .rb file with the correct URL
 # Then copy it to your tap repo
-cp .release/hyprspace.rb ~/Projects/homebrew-tap/Casks/hyprspace.rb
+cp .release/hypermac.rb ~/Projects/homebrew-tap/Casks/hypermac.rb
 ```
 
 ### 3. Users Can Now Install via Homebrew
 
 ```bash
 brew tap barutsrb/tap
-brew install --cask barutsrb/tap/hyprspace
+brew install --cask barutsrb/tap/hypermac
 ```
 
 Or in one command:
 ```bash
-brew install --cask barutsrb/tap/hyprspace
+brew install --cask barutsrb/tap/hypermac
 ```
 
 ## 🔄 Future Release Process
@@ -258,21 +258,21 @@ git push origin v0.2.0
 
 # 5. Update Homebrew cask
 ./script/build-brew-cask.sh \
-    --cask-name hyprspace \
-    --zip-uri "https://github.com/BarutSRB/HyprSpace/releases/download/v0.2.0/HyprSpace-v0.2.0.zip" \
+    --cask-name hypermac \
+    --zip-uri "https://github.com/BarutSRB/HyprSpace/releases/download/v0.2.0/HyperMac-v0.2.0.zip" \
     --build-version "0.2.0"
 
 # 6. Copy to tap repo and push
-cp .release/hyprspace.rb ~/Projects/homebrew-tap/Casks/hyprspace.rb
+cp .release/hypermac.rb ~/Projects/homebrew-tap/Casks/hypermac.rb
 cd ~/Projects/homebrew-tap
-git add Casks/hyprspace.rb
-git commit -m "Update HyprSpace to v0.2.0"
+git add Casks/hypermac.rb
+git commit -m "Update HyperMac to v0.2.0"
 git push
 ```
 
 ## 📊 DMG Creation (Optional)
 
-Currently, HyprSpace only distributes via ZIP files. If you want to create a fancy DMG:
+Currently, HyperMac only distributes via ZIP files. If you want to create a fancy DMG:
 
 You'll need to create a script using tools like:
 - `hdiutil create` (built into macOS)
@@ -283,10 +283,10 @@ Example simple DMG creation:
 ```bash
 #!/bin/bash
 # script/build-dmg.sh
-hdiutil create -volname "HyprSpace" \
-    -srcfolder .release/HyprSpace.app \
+hdiutil create -volname "HyperMac" \
+    -srcfolder .release/HyperMac.app \
     -ov -format UDZO \
-    .release/HyprSpace-v0.1.0.dmg
+    .release/HyperMac-v0.1.0.dmg
 ```
 
 However, the ZIP method is fine for now since:

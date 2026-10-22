@@ -4,8 +4,8 @@ source ./script/setup.sh
 
 ./script/check-uncommitted-files.sh
 
-rm -rf ~/Library/Developer/Xcode/DerivedData/HyprSpace-*
+rm -rf ~/Library/Developer/Xcode/DerivedData/HyperMac-*
 rm -rf ./.xcode-build
 
-rm -rf HyprSpace.xcodeproj
+rm -rf HyperMac.xcodeproj
 ./generate.sh

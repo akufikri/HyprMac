@@ -13,11 +13,11 @@ if ! ls docs/*.adoc > /dev/null 2>&1; then
 
     # Create minimal placeholder man page
     mkdir -p .man
-    echo ".TH HYPRSPACE 1 \"$(date +%Y-%m-%d)\" \"HyprSpace\" \"User Commands\"" > .man/hyprspace.1
-    echo ".SH NAME" >> .man/hyprspace.1
-    echo "hyprspace \\- Hyprland-inspired tiling window manager for macOS" >> .man/hyprspace.1
-    echo ".SH DESCRIPTION" >> .man/hyprspace.1
-    echo "See https://github.com/BarutSRB/HyprSpace for documentation" >> .man/hyprspace.1
+    echo ".TH HYPERMAC 1 \"$(date +%Y-%m-%d)\" \"HyperMac\" \"User Commands\"" > .man/hypermac.1
+    echo ".SH NAME" >> .man/hypermac.1
+    echo "hypermac \\- Hyprland-inspired tiling window manager for macOS" >> .man/hypermac.1
+    echo ".SH DESCRIPTION" >> .man/hypermac.1
+    echo "See https://github.com/BarutSRB/HyprSpace for documentation" >> .man/hypermac.1
 
     exit 0
 fi
@@ -45,8 +45,8 @@ build-site() {
     fi
 
     cd .site
-        # Delete "hyprspace " prefifx in synopsis
-        sed -E -i '' '/tag::synopsis/, /end::synopsis/ s/^(hyprspace | {10})//' hyprspace* 2>/dev/null || true
+        # Delete "hypermac " prefifx in synopsis
+        sed -E -i '' '/tag::synopsis/, /end::synopsis/ s/^(hypermac | {10})//' hypermac* 2>/dev/null || true
         bundler exec asciidoctor ./guide.adoc ./commands.adoc ./goodies.adoc 2>/dev/null || true
         if test -f goodies.html; then
             cp goodies.html goodness.html # backwards compatibility
@@ -63,7 +63,7 @@ build-site() {
 build-man() {
     cp-docs .man
     cd .man
-        bundler exec asciidoctor -b manpage hyprspace*.adoc
+        bundler exec asciidoctor -b manpage hypermac*.adoc
         rm -rf -- *.adoc
     cd - > /dev/null
 }

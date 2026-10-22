@@ -1,10 +1,10 @@
 # LICENSE
 
-The HyprSpace itself is licensed under MIT. See [LICENSE](./LICENSE.txt) for the full license text.
+The HyperMac itself is licensed under MIT. See [LICENSE](./LICENSE.txt) for the full license text.
 
 ## Bundled dependencies and materials
 
-HyprSpace bundles the following dependencies and uses the following materials:
+HyperMac bundles the following dependencies and uses the following materials:
 
 **BlueSocket**.
 [BlueSocket GitHub link](https://github.com/Kitura/BlueSocket).
@@ -29,7 +29,7 @@ tomlplusplus is used as TOML parser. tomlplusplus is used indirectly through TOM
 **ANTLR v4**.
 [ANTLR v4 GitHub link](https://github.com/antlr/antlr4).
 [ANTLR BSD-3 license](./third-party-license/LICENSE-antlr.txt).
-ANTLR is used to parse HyprSpace built-in shell like language.
+ANTLR is used to parse HyperMac built-in shell like language.
 
 **swift-collections**.
 [swift-collections GitHub link](https://github.com/apple/swift-collections).

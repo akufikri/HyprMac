@@ -52,13 +52,13 @@ struct ServerArgs: Sendable {
 }
 
 private let serverHelp = """
-    USAGE: \(CommandLine.arguments.first ?? "HyprSpace.app/Contents/MacOS/HyprSpace") [<options>]
+    USAGE: \(CommandLine.arguments.first ?? "HyperMac.app/Contents/MacOS/HyperMac") [<options>]
 
     OPTIONS:
       -h, --help              Print help
-      -v, --version           Print HyprSpace.app version
-      --config-path <path>    Config path. It will take priority over ~/.hyprspace.toml
-                              and ${XDG_CONFIG_HOME}/hyprspace/hyprspace.toml
+      -v, --version           Print HyperMac.app version
+      --config-path <path>    Config path. It will take priority over ~/.hypermac.toml
+                              and ${XDG_CONFIG_HOME}/hypermac/hypermac.toml
     """
 
 private nonisolated(unsafe) var _serverArgs = ServerArgs()
@@ -72,7 +72,7 @@ private func initServerArgs() {
     while !args.isEmpty {
         switch args.first {
             case "--version", "-v":
-                print("\(hyprSpaceAppVersion) \(gitHash)")
+                print("\(hyperMacAppVersion) \(gitHash)")
                 exit(0)
             case "--config-path":
                 if let arg = args.getOrNil(atIndex: 1) {

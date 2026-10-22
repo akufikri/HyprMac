@@ -5,8 +5,8 @@ import SwiftUI
 @MainActor
 public func menuBar(viewModel: TrayMenuModel) -> some Scene { // todo should it be converted to "SwiftUI struct"?
     MenuBarExtra {
-        let shortIdentification = "\(hyprSpaceAppName) v\(hyprSpaceAppVersion) \(gitShortHash)"
-        let identification      = "\(hyprSpaceAppName) v\(hyprSpaceAppVersion) \(gitHash)"
+        let shortIdentification = "\(hyperMacAppName) v\(hyperMacAppVersion) \(gitShortHash)"
+        let identification      = "\(hyperMacAppName) v\(hyperMacAppVersion) \(gitHash)"
         Text(shortIdentification)
         Button("Copy to clipboard") { identification.copyToClipboard() }
             .keyboardShortcut("C", modifiers: .command)
@@ -40,7 +40,7 @@ public func menuBar(viewModel: TrayMenuModel) -> some Scene { // todo should it 
                 }
             }.keyboardShortcut("R", modifiers: .command)
         }
-        Button("Quit \(hyprSpaceAppName)") {
+        Button("Quit \(hyperMacAppName)") {
             Task {
                 defer { terminateApp() }
                 try await terminationHandler.beforeTermination()

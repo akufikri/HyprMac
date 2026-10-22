@@ -27,7 +27,7 @@ public func dieT<T>(
             Please describe what you did to trigger this error
 
         Message: \(_message)
-        Version: \(hyprSpaceAppVersion)
+        Version: \(hyperMacAppVersion)
         Git hash: \(gitHash)
         refreshSessionEvent: \(refreshSessionEvent.prettyDescription)
         Date: \(Date.now)
@@ -47,9 +47,9 @@ public func dieT<T>(
     if !isUnitTest && isServer {
         showMessageInGui(
             filenameIfConsoleApp: recursionDetectorDuringTermination
-                ? "hyprspace-runtime-error-recursion.txt"
-                : "hyprspace-runtime-error.txt",
-            title: "HyprSpace Runtime Error",
+                ? "hypermac-runtime-error-recursion.txt"
+                : "hypermac-runtime-error.txt",
+            title: "HyperMac Runtime Error",
             message: message,
         )
     }

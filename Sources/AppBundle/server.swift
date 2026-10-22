@@ -6,7 +6,7 @@ func startUnixSocketServer() {
     DispatchQueue.global().async {
         let socket = Result { try Socket.create(family: .unix, type: .stream, proto: .unix) }
             .getOrDie("Can't create socket ")
-        let socketFile = "/tmp/\(hyprSpaceAppId)-\(unixUserName).sock"
+        let socketFile = "/tmp/\(hyperMacAppId)-\(unixUserName).sock"
         Result { try socket.listen(on: socketFile) }.getOrDie("Can't listen to socket \(socketFile) ")
         while true {
             guard let connection = try? socket.acceptClientConnection() else { continue }
@@ -27,8 +27,8 @@ func sendCommandToReleaseServer(args: [String]) {
     defer {
         socket.close()
     }
-    let socketFile = "/tmp/barut.hyprspace-\(unixUserName).sock"
-    if (try? socket.connect(to: socketFile)) == nil { // Can't connect, HyprSpace.app is not running
+    let socketFile = "/tmp/\(hyperMacAppIdRelease)-\(unixUserName).sock"
+    if (try? socket.connect(to: socketFile)) == nil { // Can't connect, HyperMac.app is not running
         return
     }
 
@@ -37,7 +37,7 @@ func sendCommandToReleaseServer(args: [String]) {
     _ = try? socket.readString()
 }
 
-private let serverVersionAndHash = "\(hyprSpaceAppVersion) \(gitHash)"
+private let serverVersionAndHash = "\(hyperMacAppVersion) \(gitHash)"
 
 private func newConnection(_ socket: Socket) async { // todo add exit codes
     func answerToClient(exitCode: Int32, stdout: String = "", stderr: String = "") {
@@ -72,8 +72,8 @@ private func newConnection(_ socket: Socket) async { // todo add exit codes
         guard let token: RunSessionGuard = await .isServerEnabled(orIsEnableCommand: command) else {
             answerToClient(
                 exitCode: 1,
-                stderr: "\(hyprSpaceAppName) server is disabled and doesn't accept commands. " +
-                    "You can use 'hyprspace enable on' to enable the server",
+                stderr: "\(hyperMacAppName) server is disabled and doesn't accept commands. " +
+                    "You can use 'hypermac enable on' to enable the server",
             )
             continue
         }
@@ -92,7 +92,7 @@ private func newConnection(_ socket: Socket) async { // todo add exit codes
         if let command {
             let _answer: Result<ServerAnswer, Error> = await Task { @MainActor in
                 try await runSession(.socketServer, token) { () throws in
-                    let cmdResult = try await command.run(.defaultEnv, CmdStdin(request.stdin)) // todo pass HYPRSPACE_ env vars from CLI instead of defaultEnv
+                    let cmdResult = try await command.run(.defaultEnv, CmdStdin(request.stdin)) // todo pass HYPERMAC_ env vars from CLI instead of defaultEnv
                     return ServerAnswer(
                         exitCode: cmdResult.exitCode,
                         stdout: cmdResult.stdout.joined(separator: "\n"),

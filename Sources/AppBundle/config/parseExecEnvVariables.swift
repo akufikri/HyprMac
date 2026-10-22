@@ -2,7 +2,7 @@ import AppKit
 import Common
 import TOMLKit
 
-let testEnv = ["PATH": "HYPRSPACE_TEST_PATH", "HYPRSPACE_INHERITED_TEST_ENV": "inherited"]
+let testEnv = ["PATH": "HYPERMAC_TEST_PATH", "HYPERMAC_INHERITED_TEST_ENV": "inherited"]
 private var env: [String: String] {
     isUnitTest ? testEnv : ProcessInfo.processInfo.environment
 }

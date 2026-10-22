@@ -1,13 +1,15 @@
-# Alternative HyprSpace Configuration Example
+# Alternative HyperMac Configuration Example
+# Note: deep links in this file point at the upstream project's documentation. The commands,
+# keys and values are identical in HyperMac, so those pages stay accurate.
 # This is an alternative configuration showing different layout preferences
-# Place a copy of this config to ~/.hyprspace.toml
-# After that, you can edit ~/.hyprspace.toml to your liking
+# Place a copy of this config to ~/.hypermac.toml
+# After that, you can edit ~/.hypermac.toml to your liking
 
-# You can use it to add commands that run after HyprSpace startup.
+# You can use it to add commands that run after HyperMac startup.
 # Available commands : https://github.com/BarutSRB/HyprSpace
 after-startup-command = ['layout dwindle']
 
-# Start HyprSpace at login
+# Start HyperMac at login
 start-at-login = true
 
 # Normalizations. See: https://github.com/BarutSRB/HyprSpace

@@ -5,7 +5,7 @@ import SwiftUI
 
 @MainActor // macOS 13
 @main
-struct HyprSpaceApp: App {
+struct HyperMacApp: App {
     @MainActor // macOS 13
     @StateObject var viewModel = TrayMenuModel.shared
 

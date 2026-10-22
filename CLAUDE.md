@@ -4,16 +4,16 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-HyprSpace is an i3-like tiling window manager for macOS written in Swift. The project uses Swift Package Manager (SPM) for building and dependency management, with Xcode project generation for App Bundle creation.
+HyperMac is an i3-like tiling window manager for macOS written in Swift. The project uses Swift Package Manager (SPM) for building and dependency management, with Xcode project generation for App Bundle creation.
 
 ## Architecture
 
 ### Core Components
 
 1. **Client/Server Architecture**:
-   - `hyprspace` CLI binary (client) - Located in `Sources/Cli/`
-   - `HyprSpace.app` (server) - Located in `Sources/AppBundle/`
-   - Communication via UNIX socket at `/tmp/barut.hyprspace-{username}.sock`
+   - `hypermac` CLI binary (client) - Located in `Sources/Cli/`
+   - `HyperMac.app` (server) - Located in `Sources/AppBundle/`
+   - Communication via UNIX socket at `/tmp/dev.hypermac.HyperMac-{username}.sock`
 
 2. **Tree-based Window Management**:
    - Window hierarchy managed as a tree structure in `Sources/AppBundle/tree/`
@@ -26,15 +26,15 @@ HyprSpace is an i3-like tiling window manager for macOS written in Swift. The pr
    - Each command has corresponding implementation and argument parsing
 
 4. **Configuration**:
-   - TOML-based configuration in `~/.hyprspace.toml` (release) or `~/.hyprspace-debug.toml` (debug)
+   - TOML-based configuration in `~/.hypermac.toml` (release) or `~/.hypermac-debug.toml` (debug)
    - Config parsing in `Sources/AppBundle/config/`
 
 5. **Package Targets** (from `Package.swift`):
    - `Common`: Shared code with argument parsing
    - `PrivateApi`: C wrapper for `_AXUIElementGetWindow` private API
    - `AppBundle`: Core window manager logic (library)
-   - `HyprSpaceApp`: Main app executable (SPM builds)
-   - `Cli`: hyprspace CLI binary
+   - `HyperMacApp`: Main app executable (SPM builds)
+   - `Cli`: hypermac CLI binary
    - `AppBundleTests`: Test suite
 
 ## Build Commands
@@ -77,7 +77,7 @@ HyprSpace is an i3-like tiling window manager for macOS written in Swift. The pr
 # Build release version (uses Xcode via XcodeGen, outputs to .release/)
 ./build-release.sh
 
-# Install from sources as hyprspace-dev brew cask
+# Install from sources as hypermac-dev brew cask
 ./install-from-sources.sh
 
 # Build brew cask package
@@ -126,7 +126,7 @@ make format     # Runs ./format.sh
 
 3. **Code Signing** (for App Bundle):
    - Create self-signed certificate in Keychain Access
-   - Name: `hyprspace-codesign-certificate`
+   - Name: `hypermac-codesign-certificate`
    - Type: Code Signing
 
 4. **IDE Setup**:
@@ -167,7 +167,7 @@ make format     # Runs ./format.sh
 
 ## Build Outputs
 
-- `.debug/`: Debug build outputs (hyprspace CLI + HyprSpaceApp)
+- `.debug/`: Debug build outputs (hypermac CLI + HyperMacApp)
 - `.release/`: Release build outputs from Xcode
 - `.site/`: Generated documentation site
 - `.man/`: Generated man pages
@@ -181,8 +181,8 @@ make format     # Runs ./format.sh
 - Single private API usage: `_AXUIElementGetWindow`
 - Emulates virtual workspaces instead of using macOS Spaces
 - Thread-per-application architecture for non-blocking AX API calls
-- Debug builds use `~/.hyprspace-debug.toml` configuration
-- Bundle IDs: `barut.hyprspace.debug` (Debug), `barut.hyprspace` (Release)
+- Debug builds use `~/.hypermac-debug.toml` configuration
+- Bundle IDs: `dev.hypermac.HyperMac.debug` (Debug), `dev.hypermac.HyperMac` (Release)
 - Runs as agent app (LSUIElement) without Dock icon
 - Sandbox disabled for Accessibility API access
 
@@ -191,7 +191,7 @@ make format     # Runs ./format.sh
 ### Adding a New Command
 1. Define command arguments in `Sources/Common/cmdArgs/`
 2. Implement command logic in `Sources/AppBundle/command/`
-3. Update documentation in `docs/hyprspace-*.adoc`
+3. Update documentation in `docs/hypermac-*.adoc`
 4. Add shell completion in `grammar/commands-bnf-grammar.txt`
 5. Run `./generate.sh` to update generated files
 

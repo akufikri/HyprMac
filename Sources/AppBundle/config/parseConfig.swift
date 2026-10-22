@@ -141,7 +141,7 @@ func parseAfterLoginCommand(_ raw: TOMLValueConvertible, _ backtrace: TomlBacktr
     if let array = raw.array, array.count == 0 {
         return .success([])
     }
-    let msg = "after-login-command is deprecated since HyprSpace 0.19.0. https://github.com/BarutSRB/HyprSpace/issues/1482"
+    let msg = "after-login-command is deprecated since HyperMac 0.19.0. https://github.com/BarutSRB/HyprSpace/issues/1482"
     return .failure(.semantic(backtrace, msg))
 }
 

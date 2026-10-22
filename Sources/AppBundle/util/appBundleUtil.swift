@@ -3,11 +3,11 @@ import Common
 import Foundation
 import os
 
-let signposter = OSSignposter(subsystem: hyprSpaceAppId, category: .pointsOfInterest)
+let signposter = OSSignposter(subsystem: hyperMacAppId, category: .pointsOfInterest)
 
 let lockScreenAppBundleId = "com.apple.loginwindow"
-let HYPRSPACE_WINDOW_ID = "HYPRSPACE_WINDOW_ID" // env var
-let HYPRSPACE_WORKSPACE = "HYPRSPACE_WORKSPACE" // env var
+let HYPERMAC_WINDOW_ID = "HYPERMAC_WINDOW_ID" // env var
+let HYPERMAC_WORKSPACE = "HYPERMAC_WORKSPACE" // env var
 
 func stringType(of some: Any) -> String {
     let string = (some is Any.Type) ? String(describing: some) : String(describing: type(of: some))

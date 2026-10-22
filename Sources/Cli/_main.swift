@@ -5,7 +5,7 @@ import Socket
 
 let usage =
     """
-    USAGE: \(CommandLine.arguments.first ?? "hyprspace") [-h|--help] [-v|--version] <subcommand> [<args>...]
+    USAGE: \(CommandLine.arguments.first ?? "hypermac") [-h|--help] [-v|--version] <subcommand> [<args>...]
 
     SUBCOMMANDS:
     \(subcommandDescriptions.sortedBy { $0[0] }.toPaddingTable(columnSeparator: "   ").joined(separator: "\n"))
@@ -44,13 +44,13 @@ struct Main {
             socket.close()
         }
 
-        let socketFile = "/tmp/\(hyprSpaceAppId)-\(unixUserName).sock"
+        let socketFile = "/tmp/\(hyperMacAppId)-\(unixUserName).sock"
 
         if let e: Error = Result(catching: { try socket.connect(to: socketFile) }).failureOrNil {
             if isVersion {
                 printVersionAndExit(serverVersion: nil)
             } else {
-                cliError("Can't connect to HyprSpace server. Is HyprSpace.app running?\n\(e.localizedDescription)")
+                cliError("Can't connect to HyperMac server. Is HyperMac.app running?\n\(e.localizedDescription)")
             }
         }
 
@@ -76,12 +76,12 @@ struct Main {
         if ans.exitCode != 0 && ans.serverVersionAndHash != cliClientVersionAndHash {
             printStderr(
                 """
-                Warning: HyprSpace client/server versions don't match
-                    - hyprspace CLI client version: \(cliClientVersionAndHash)
-                    - HyprSpace.app server version: \(ans.serverVersionAndHash)
+                Warning: HyperMac client/server versions don't match
+                    - hypermac CLI client version: \(cliClientVersionAndHash)
+                    - HyperMac.app server version: \(ans.serverVersionAndHash)
                     Possible fixes:
-                    - Restart HyprSpace.app (server restart is required after each update)
-                    - Reinstall and restart HyprSpace (corrupted installation)
+                    - Restart HyperMac.app (server restart is required after each update)
+                    - Reinstall and restart HyperMac (corrupted installation)
                 """,
             )
         }
@@ -92,8 +92,8 @@ struct Main {
 func printVersionAndExit(serverVersion: String?) -> Never {
     print(
         """
-        hyprspace CLI client version: \(cliClientVersionAndHash)
-        HyprSpace.app server version: \(serverVersion ?? "Unknown. The server is not running")
+        hypermac CLI client version: \(cliClientVersionAndHash)
+        HyperMac.app server version: \(serverVersion ?? "Unknown. The server is not running")
         """,
     )
     exit(0)

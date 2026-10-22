@@ -1,4 +1,5 @@
 import AppKit
+import Common
 
 extension Workspace {
     @MainActor // todo can be dropped in future Swift versions?
@@ -92,6 +93,29 @@ extension Window {
 }
 
 extension TilingContainer {
+    /// The fraction of the split box that the first (left/top) side of a dwindle split occupies.
+    ///
+    /// Hyprland stores a `splitRatio` splittable between `0.1` and `1.9`, where `0.5` means an even
+    /// split. The equivalent fraction is `ratio / (1 + ratio)`, which is the same thing as
+    /// `firstWeight / (firstWeight + secondWeight)`. The result is clamped to `0.05...0.95` so that
+    /// neither side of the split can collapse to zero (the fraction form of Hyprland's clamp).
+    ///
+    /// Pure and free of AppKit and actor state on purpose: the parity rules are unit-tested directly.
+    ///
+    /// Weights are shares, not signed quantities. A non-finite weight is a programming error and falls
+    /// back to an even split; a non-positive weight is floored at zero, because `resize` is
+    /// weight-conserving in absolute units and therefore pushes the non-target sibling through zero on
+    /// a two-child container. Flooring keeps the surviving share finite so the clamp still applies,
+    /// instead of silently reverting the user's resize to an even split.
+    nonisolated static func dwindleFraction(firstWeight: CGFloat, secondWeight: CGFloat) -> CGFloat {
+        guard firstWeight.isFinite, secondWeight.isFinite else { return 0.5 }
+        let first = max(firstWeight, 0)
+        let second = max(secondWeight, 0)
+        let sum = first + second
+        guard sum > 0 else { return 0.5 }
+        return min(max(first / sum, 0.05), 0.95)
+    }
+
     @MainActor // todo can be dropped in future Swift versions?
     fileprivate func layoutDwindle(_ point: CGPoint, width: CGFloat, height: CGFloat, virtual: Rect, _ context: LayoutContext) async throws {
         // Dwindle layout uses a binary tree approach with automatic split direction selection
@@ -128,13 +152,21 @@ extension TilingContainer {
             ? context.resolvedGaps.inner.horizontal.toDouble()
             : context.resolvedGaps.inner.vertical.toDouble()
         
-        // Split ratio (default 50/50)
-        let splitRatio: CGFloat = 0.5
-        
         // Calculate midpoint for splitting
         let midIndex = nodes.count / 2
         let leftNodes = Array(nodes[0..<midIndex])
         let rightNodes = Array(nodes[midIndex...])
+
+        // Weighted split ratio (Hyprland dwindle parity). Weights only make sense along the axis the
+        // container actually splits on; a node's own weight must never be mixed with the weight of an
+        // ancestor that happens to run along a different axis, which is what getWeight would return.
+        let axis: Orientation = splitVertically ? .h : .v
+        let splitRatio: CGFloat = orientation == axis
+            ? Self.dwindleFraction(
+                firstWeight: leftNodes.map { $0.getWeight(axis) }.reduce(CGFloat(0), +),
+                secondWeight: rightNodes.map { $0.getWeight(axis) }.reduce(CGFloat(0), +),
+            )
+            : 0.5
         
         if splitVertically {
             // Split left/right with gap

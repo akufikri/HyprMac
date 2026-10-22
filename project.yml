@@ -1,10 +1,10 @@
 # Xcode project configuration. Managed by https://github.com/yonaskolb/XcodeGen
 # Xcode is only used to build the release App Bundle. Debug builds only use Swift Package Manager
 
-name: HyprSpace
+name: HyperMac
 
 packages:
-  HyprSpacePackage:
+  HyperMacPackage:
     path: .
 
 configs:
@@ -12,37 +12,37 @@ configs:
   Release: release
 
 targets:
-  HyprSpace:
+  HyperMac:
     type: application
     platform: macOS
     deploymentTarget: "13.0"
     sources:
-      - "Sources/HyprSpaceApp"
+      - "Sources/HyperMacApp"
       - "resources"
       - "docs/config-examples/default-config.toml"
     dependencies:
-      - package: HyprSpacePackage
+      - package: HyperMacPackage
         product: AppBundle
     # https://developer.apple.com/documentation/xcode/build-settings-reference
     settings:
       base:
         SWIFT_VERSION: 6.0
         GENERATE_INFOPLIST_FILE: YES
-        MARKETING_VERSION: ${XCODEGEN_HYPRSPACE_VERSION}
+        MARKETING_VERSION: ${XCODEGEN_HYPERMAC_VERSION}
         # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/LaunchServicesKeys.html#//apple_ref/doc/uid/20001431-108256
         # Specifies whether the app runs as an agent app. If this key is set to YES, Launch Services runs the app as an agent app.
         # Agent apps do not appear in the Dock or in the Force Quit window
         INFOPLIST_KEY_LSUIElement: YES
-        CODE_SIGN_IDENTITY: ${XCODEGEN_HYPRSPACE_CODE_SIGN_IDENTITY}
+        CODE_SIGN_IDENTITY: ${XCODEGEN_HYPERMAC_CODE_SIGN_IDENTITY}
       configs:
         Debug:
-          PRODUCT_NAME: HyprSpace-Debug
-          PRODUCT_BUNDLE_IDENTIFIER: barut.hyprspace.debug
+          PRODUCT_NAME: HyperMac-Debug
+          PRODUCT_BUNDLE_IDENTIFIER: dev.hypermac.HyperMac.debug
         Release:
-          PRODUCT_NAME: HyprSpace
-          PRODUCT_BUNDLE_IDENTIFIER: barut.hyprspace
+          PRODUCT_NAME: HyperMac
+          PRODUCT_BUNDLE_IDENTIFIER: dev.hypermac.HyperMac
     entitlements:
-      path: resources/HyprSpace.entitlements
+      path: resources/HyperMac.entitlements
       properties:
         # Accessibility API doesn't work in sandboxed app
         com.apple.security.app-sandbox: false

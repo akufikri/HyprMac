@@ -62,7 +62,7 @@ extension String {
         }
     }
     if args.json {
-        if let json = JSONEncoder.hyprSpaceDefault.encodeToString(configMap) {
+        if let json = JSONEncoder.hyperMacDefault.encodeToString(configMap) {
             return io.out(json)
         } else {
             return io.err("Can't convert json Data to String")

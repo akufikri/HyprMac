@@ -30,10 +30,10 @@ struct CmdEnv: ConvenienceCopyable { // todo forward env from cli to server
             result["PWD"] = pwd
         }
         if let windowId {
-            result[HYPRSPACE_WINDOW_ID] = windowId.description
+            result[HYPERMAC_WINDOW_ID] = windowId.description
         }
         if let workspaceName {
-            result[HYPRSPACE_WORKSPACE] = workspaceName.description
+            result[HYPERMAC_WORKSPACE] = workspaceName.description
         }
         return result
     }

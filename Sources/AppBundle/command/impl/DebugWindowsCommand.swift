@@ -47,7 +47,7 @@ struct DebugWindowsCommand: Command {
                     """
                     Debug windows session has started
                     1. Focus the problematic window
-                    2. Run 'hyprspace debug-windows' once again to finish the session and get the results
+                    2. Run 'hypermac debug-windows' once again to finish the session and get the results
                     """,
                 )
                 // Make sure that the Terminal window that started the recording is recorded first
@@ -99,7 +99,7 @@ private func dumpWindowDebugInfo(_ window: Window) async throws -> String {
     }
     result["Aero.on-window-detected"] = .array(matchingCallbacks)
 
-    return JSONEncoder.hyprSpaceDefault.encodeToString(result).prettyDescription
+    return JSONEncoder.hyperMacDefault.encodeToString(result).prettyDescription
         .prefixLines(with: "\(window.app.bundleId ?? "nil-bundle-id").\(window.windowId) ||| ")
 }
 

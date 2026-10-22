@@ -11,7 +11,7 @@ struct ListModesCommand: Command {
             case args.outputOnlyCount:
                 io.out("\(modes.count)")
             case args.json:
-                JSONEncoder.hyprSpaceDefault.encodeToString(modes.map { ["mode-id": $0] }).map(io.out)
+                JSONEncoder.hyperMacDefault.encodeToString(modes.map { ["mode-id": $0] }).map(io.out)
                     ?? io.err("Failed to encode JSON")
             default:
                 io.out(modes)

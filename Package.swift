@@ -4,15 +4,15 @@
 import PackageDescription
 
 let package = Package(
-    name: "HyprSpacePackage",
+    name: "HyperMacPackage",
     // Runtime support for parameterized protocol types is only available in macOS 13.0.0 or newer
     // And it specifies deploymentTarget for CLI
     platforms: [.macOS(.v13)],
     // Products define the executables and libraries a package produces, making them visible to other packages.
     products: [
-        .executable(name: "hyprspace", targets: ["Cli"]),
+        .executable(name: "hypermac", targets: ["Cli"]),
         // Don't use this build for release, use xcode instead
-        .executable(name: "HyprSpaceApp", targets: ["HyprSpaceApp"]),
+        .executable(name: "HyperMacApp", targets: ["HyperMacApp"]),
         // We only need to expose this as a product for xcode
         .library(name: "AppBundle", targets: ["AppBundle"]),
     ],
@@ -53,7 +53,7 @@ let package = Package(
             ],
         ),
         .executableTarget(
-            name: "HyprSpaceApp",
+            name: "HyperMacApp",
             dependencies: [
                 .target(name: "AppBundle"),
             ],

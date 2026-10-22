@@ -14,10 +14,10 @@ if test $rebuild == 1; then
     ./build-release.sh
 fi
 
-brew list hyprspace-dev > /dev/null 2>&1 && brew uninstall hyprspace-dev
-brew list hyprspace > /dev/null 2>&1 && brew uninstall hyprspace
+brew list hypermac-dev > /dev/null 2>&1 && brew uninstall hypermac-dev
+brew list hypermac > /dev/null 2>&1 && brew uninstall hypermac
 
 # Override HOMEBREW_CACHE. Otherwise, homebrew refuses to "redownload" the snapshot file
 # Maybe there is a better way, I don't know
-rm -rf /tmp/hyprspace-from-sources-brew-cache
-env HOMEBREW_CACHE=/tmp/hyprspace-from-sources-brew-cache brew install --cask ./.release/hyprspace-dev.rb
+rm -rf /tmp/hypermac-from-sources-brew-cache
+env HOMEBREW_CACHE=/tmp/hypermac-from-sources-brew-cache brew install --cask ./.release/hypermac-dev.rb

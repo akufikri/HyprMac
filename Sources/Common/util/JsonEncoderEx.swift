@@ -1,7 +1,7 @@
 import Foundation
 
 extension JSONEncoder {
-    public static var hyprSpaceDefault: JSONEncoder {
+    public static var hyperMacDefault: JSONEncoder {
         let encoder = JSONEncoder()
         encoder.outputFormatting = [.prettyPrinted, .withoutEscapingSlashes, .sortedKeys]
         return encoder
