@@ -1,3 +1,5 @@
+<img width="150" height="150" alt="HyprMac Fox Window Logo" src="https://github.com/user-attachments/assets/b67a7a42-6372-4e75-a166-0db03dc9d7a9" />
+
 # HyperMac
 
 HyperMac is a keyboard-driven tiling window manager for macOS. It reads the on-screen window
